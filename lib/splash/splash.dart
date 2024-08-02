@@ -7,18 +7,27 @@ class SplashCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void request() {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Splash()));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Splash()));
     }
 
     return Scaffold(
       body: Stack(
         children: [
-          Image.asset(
-            'assets/images/one.jpg',
-            fit: BoxFit.cover,
-            height: double.infinity,
-            width: double.infinity,
+          PageView(
+            children: [
+              Image.asset(
+                'assets/images/one.jpg',
+                fit: BoxFit.cover,
+                height: double.infinity,
+                width: double.infinity,
+              ),
+              Image.asset(
+                'assets/images/tow.jpg',
+                fit: BoxFit.cover,
+                height: double.infinity,
+                width: double.infinity,
+              ),
+            ],
           ),
           Positioned(
             bottom: MediaQuery.of(context).size.height * 0.1,
@@ -29,30 +38,24 @@ class SplashCustom extends StatelessWidget {
               children: [
                 const Text(
                   'Geeta.',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 70,
-                      color: Colors.white),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 70, color: Colors.white),
                 ),
                 const SizedBox(
                   height: 40,
                 ),
                 TextButton(
                   onPressed: request,
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      side: const BorderSide(color: Colors.white, width: 3)),
                   child: const Text(
                     '        SHOP NOW        ',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                  style: TextButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      side: const BorderSide(color: Colors.white, width: 3)),
                 ),
-                Text(
+                const Text(
                   '        ...       ',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 70,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.white, fontSize: 70, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
