@@ -3,4 +3,6 @@ class ApiConstants {
 
   static const registerUrl = 'register';
   static const loginUrl = 'login';
+
+  static const categoriesUrl = 'categories';
 }
