@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/modules/screen/register.dart';
 import 'package:flutter_application_1/routes/app_routes.dart';
 
 class SplashView extends StatelessWidget {
@@ -8,10 +7,6 @@ class SplashView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void register() {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Register()));
-    }
-
     return Scaffold(
       body: Stack(
         children: [
@@ -80,7 +75,9 @@ class SplashView extends StatelessWidget {
                   height: 30,
                 ),
                 TextButton(
-                  onPressed: register,
+                  onPressed: () {
+                    navKey.currentState?.pushNamed(AppRoutes.SIGNUP);
+                  },
                   style: TextButton.styleFrom(
                     backgroundColor: const Color(0xff6342E8),
                   ),

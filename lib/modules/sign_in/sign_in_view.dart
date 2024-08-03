@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/modules/customtextfield/custom_text_field.dart';
-import 'package:flutter_application_1/modules/screen/register.dart';
 import 'package:flutter_application_1/modules/sign_in/signin_cubit.dart';
+import 'package:flutter_application_1/modules/sign_up/sign_up_view.dart';
 import 'package:flutter_application_1/routes/app_routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -164,7 +164,7 @@ class SignInView extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const Register(),
+                              builder: (context) => const SignUpView(),
                             ));
                           },
                           child: const Text('Create an Account',

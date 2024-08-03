@@ -18,4 +18,23 @@ class AuthRepoApi {
 
     return User.fromJson(response['user'] as Map<String, dynamic>);
   }
+
+  static Future<User?> register(String email, String password, String name) async {
+    final response = await BaseRequest.dynamicRequest(
+      path: ApiConstants.registerUrl,
+      requestType: RequestType.POST,
+      body: {
+        "email": email,
+        "password": password,
+        "name": name,
+      },
+    );
+
+    if (response == null || response['user'] == null || response['token'] == null) return null;
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('tokken', response['token']);
+
+    return User.fromJson(response['user'] as Map<String, dynamic>);
+  }
 }
