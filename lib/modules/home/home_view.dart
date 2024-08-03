@@ -3,6 +3,7 @@ import 'package:flutter_application_1/modules/drawer/drawer.dart';
 import 'package:flutter_application_1/modules/favorite/favorite.dart';
 import 'package:flutter_application_1/modules/home/home_cubit.dart';
 import 'package:flutter_application_1/modules/home/tabs/product_list.dart';
+import 'package:flutter_application_1/modules/home/widgets/custom_tab_bar.dart';
 import 'package:flutter_application_1/modules/searsh/searsh.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,17 +25,7 @@ class HomeView extends StatelessWidget {
               length: cats!.length,
               child: Column(
                 children: [
-                  TabBar(
-                    tabs: cats
-                        .map((e) => Text(
-                              e.name!,
-                              style: const TextStyle(fontSize: 14),
-                            ))
-                        .toList(),
-                    isScrollable: true,
-                    labelPadding: const EdgeInsets.all(10),
-                    onTap: (value) => context.read<HomeCubit>().getSingleCategory(cats[value].id!),
-                  ),
+                  CustomTabBarSection(cats: cats),
                   Expanded(
                     child: TabBarView(
                       physics: const NeverScrollableScrollPhysics(),

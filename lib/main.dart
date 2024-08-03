@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/modules/home/home_cubit.dart';
 import 'package:flutter_application_1/routes/app_routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
 
 void main() {
@@ -14,16 +16,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OKToast(
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<HomeCubit>(create: (context) => HomeCubit()),
+        ],
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          navigatorKey: navKey,
+          initialRoute: '/',
+          debugShowCheckedModeBanner: false,
+          routes: appRoutes,
         ),
-        navigatorKey: navKey,
-        initialRoute: '/',
-        debugShowCheckedModeBanner: false,
-        routes: appRoutes,
       ),
     );
   }

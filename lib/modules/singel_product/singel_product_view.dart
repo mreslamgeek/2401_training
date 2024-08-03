@@ -1,18 +1,24 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/data/models/category.dart';
+import 'package:flutter_application_1/data/models/product.dart';
 import 'package:flutter_application_1/modules/card/card.dart';
+import 'package:flutter_application_1/modules/home/home_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:group_button/group_button.dart';
 
-class Custom_Buy extends StatelessWidget {
-  const Custom_Buy({
-    super.key,
-  });
+class SingleProductView extends StatelessWidget {
+  const SingleProductView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const String price = '48.00';
-    const String image = 'assets/images/hoodie    .png';
+    Product item = ModalRoute.of(context)!.settings.arguments as Product;
+
+    final homeCubit = context.read<HomeCubit>();
+
+    Category productCat =
+        homeCubit.categories!.firstWhere((element) => element.id == item.categoryId);
 
     return Scaffold(
       backgroundColor: const Color(0xffF1F4FB),
@@ -28,13 +34,8 @@ class Custom_Buy extends StatelessWidget {
                   alignment: Alignment.center,
                   children: [
                     const Positioned(
-                        top: 0,
-                        right: 0,
-                        child: Icon(
-                          Icons.favorite_border_rounded,
-                          size: 35,
-                        )),
-                    Image.asset(image)
+                        top: 0, right: 16, child: Icon(Icons.favorite_border_rounded, size: 35)),
+                    Image.network(item.image!)
                   ],
                 )),
             Container(
@@ -49,47 +50,36 @@ class Custom_Buy extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Geeta mens'),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Text(productCat.name!),
+                    Row(
                       children: [
-                        Text(
-                          'Purple Hoodie ',
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                        Expanded(
+                          child: Text(
+                            item.name!,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              overflow: TextOverflow.visible,
+                            ),
+                          ),
                         ),
+                        const SizedBox(width: 8),
                         Text(
-                          '\$$price USD',
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          '\$${item.price} USD',
+                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         )
                       ],
                     ),
                     Row(
                       children: [
-                        const Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        const Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        const Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        const Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.grey[500],
-                        ),
+                        const Icon(Icons.star, color: Colors.amber),
+                        const Icon(Icons.star, color: Colors.amber),
+                        const Icon(Icons.star, color: Colors.amber),
+                        const Icon(Icons.star, color: Colors.amber),
+                        Icon(Icons.star, color: Colors.grey[500]),
                       ],
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -111,9 +101,7 @@ class Custom_Buy extends StatelessWidget {
                         IconButton(onPressed: () {}, icon: const Icon(Icons.ios_share_outlined))
                       ],
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    const SizedBox(height: 20),
                     const Text(
                       'DESCRIPTION',
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -121,9 +109,7 @@ class Custom_Buy extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    const Text(
-                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book...detail',
-                    ),
+                    Text(item.description!),
                     const SizedBox(
                       height: 20,
                     ),

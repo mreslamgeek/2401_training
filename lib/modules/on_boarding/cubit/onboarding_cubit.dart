@@ -17,7 +17,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     var tokken = prefs.getString('tokken');
 
     if (tokken != null) {
-      navKey.currentState?.pushNamed(AppRoutes.HOME);
+      navKey.currentState?.pushNamedAndRemoveUntil(AppRoutes.HOME, (route) => false);
     }
   }
 }
