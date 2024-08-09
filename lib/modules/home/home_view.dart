@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/modules/drawer/drawer.dart';
-import 'package:flutter_application_1/modules/favorite/favorite.dart';
 import 'package:flutter_application_1/modules/home/home_cubit.dart';
 import 'package:flutter_application_1/modules/home/tabs/product_list.dart';
 import 'package:flutter_application_1/modules/home/widgets/custom_tab_bar.dart';
 import 'package:flutter_application_1/modules/searsh/searsh.dart';
+import 'package:flutter_application_1/routes/app_routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeView extends StatelessWidget {
@@ -15,28 +16,55 @@ class HomeView extends StatelessWidget {
     GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: scaffoldkey,
-      endDrawer: const CustomDrawer(),
+      drawer: const CustomDrawer(),
       appBar: _buildAppBar(context, scaffoldkey),
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
-          final cats = context.read<HomeCubit>().categories;
-          if (state is CategoryLoaded || cats != null) {
-            return DefaultTabController(
-              length: cats!.length,
-              child: Column(
-                children: [
-                  CustomTabBarSection(cats: cats),
-                  Expanded(
-                    child: TabBarView(
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: cats.map((e) => const ProductsList()).toList(),
-                    ),
-                  ),
-                ],
-              ),
-            );
+          if (state is Loading) {
+            return const Center(child: CircularProgressIndicator());
           }
-          return const Center(child: CircularProgressIndicator());
+
+          final cats = context.read<HomeCubit>().categories;
+
+          if (state is CategoryLoaded) {
+            if (cats == null || cats.isEmpty == true) {
+              return const Center(child: Text('No Date , Please Check Internet'));
+            } else {
+              return DefaultTabController(
+                length: cats.length,
+                child: Column(
+                  children: [
+                    CustomTabBarSection(cats: cats),
+                    Expanded(
+                      child: TabBarView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: cats.map((e) => const ProductsList()).toList(),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+          } else {
+            if (cats == null || cats.isEmpty == true) {
+              return const Center(child: Text('No Date , Please Check Internet'));
+            } else {
+              return DefaultTabController(
+                length: cats.length,
+                child: Column(
+                  children: [
+                    CustomTabBarSection(cats: cats),
+                    Expanded(
+                      child: TabBarView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: cats.map((e) => const ProductsList()).toList(),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+          }
         },
       ),
     );
@@ -50,22 +78,6 @@ class HomeView extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          icon: const Icon(Icons.notifications_none_sharp),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: const Icon(Icons.shopping_bag_outlined),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: const Icon(Icons.favorite_border),
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const Favorite()),
-            );
-          },
-        ),
-        IconButton(
           icon: const Icon(Icons.search),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
@@ -74,14 +86,21 @@ class HomeView extends StatelessWidget {
           },
         ),
         IconButton(
-          icon: const Icon(Icons.list),
+          icon: const Icon(Icons.notifications_none_sharp),
+          onPressed: () {},
+        ),
+        IconButton(
+          icon: const Icon(Icons.shopping_bag_outlined),
           onPressed: () {
-            scaffoldkey.currentState!.openEndDrawer();
+            // context
+            //     .read<CartCubit>()
+            //     .getCart()
+            //     .then((value) => navKey.currentState?.pushNamed(AppRoutes.CART));
+
+            navKey.currentState?.pushNamed(AppRoutes.CART);
           },
         ),
-        const SizedBox(
-          width: 15,
-        ),
+        const SizedBox(width: 12),
       ],
     );
   }

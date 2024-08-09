@@ -1,3 +1,4 @@
+import 'package:flutter_application_1/modules/cart/cart_view.dart';
 import 'package:flutter_application_1/modules/home/home_view.dart';
 import 'package:flutter_application_1/modules/on_boarding/cubit/onboarding_cubit.dart';
 import 'package:flutter_application_1/modules/on_boarding/on_boarding.dart';
@@ -16,6 +17,7 @@ class AppRoutes {
   static const SIGNUP = 'sign-up';
   static const HOME = 'home';
   static const SINGLEPRODUCT = 'singel-product';
+  static const CART = 'cart';
 }
 
 final appRoutes = {
@@ -35,4 +37,5 @@ final appRoutes = {
         child: const SignUpView(),
       ),
   AppRoutes.SINGLEPRODUCT: (context) => const SingleProductView(),
+  AppRoutes.CART: (context) => const CartView(),
 };

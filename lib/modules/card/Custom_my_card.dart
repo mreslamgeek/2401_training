@@ -1,28 +1,25 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/data/models/product.dart';
 
 class CustomMyCard extends StatelessWidget {
-  final cardName;
-  final cardImage;
-  final cardPrice;
-  const CustomMyCard(
-      {super.key, this.cardName, this.cardImage, this.cardPrice});
+  final Product item;
+  const CustomMyCard({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 150,
-      color: Color(0xffF1F4FB),
+      color: const Color(0xffF1F4FB),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset(cardImage),
+          Image.asset(item.image ?? ''),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                cardName,
+                item.name ?? '',
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -40,7 +37,7 @@ class CustomMyCard extends StatelessWidget {
                 height: 25,
               ),
               Text(
-                '\$$cardPrice',
+                '\$${item.price}',
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,

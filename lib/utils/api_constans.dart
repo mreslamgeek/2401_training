@@ -5,4 +5,6 @@ class ApiConstants {
   static const loginUrl = 'login';
 
   static const categoriesUrl = 'categories';
+
+  static const cartUrl = 'cart';
 }

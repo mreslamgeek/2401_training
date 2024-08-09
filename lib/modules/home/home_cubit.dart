@@ -33,4 +33,14 @@ class HomeCubit extends Cubit<HomeState> {
     products = await CategoriesRepoApi.getCategoryProducts(id);
     emit(ProductsLoaded());
   }
+
+  Category? findCategory(int id) {
+    final productCat =
+        categories!.firstWhere((element) => element.id == id, orElse: () => Category(id: 0));
+
+    if (productCat.id == 0) {
+      return null;
+    }
+    return productCat;
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/data/models/product.dart';
 import 'package:flutter_application_1/modules/card/Custom_my_card.dart';
 
 class MyCard extends StatelessWidget {
@@ -49,9 +50,10 @@ class MyCard extends StatelessWidget {
                     ),
                     itemBuilder: (context, index) {
                       return CustomMyCard(
-                        cardName: name[index],
-                        cardImage: images[index],
-                        cardPrice: price[index],
+                        item: Product(),
+                        // cardName: name[index],
+                        // cardImage: images[index],
+                        // cardPrice: price[index],
                       );
                     },
                   ),

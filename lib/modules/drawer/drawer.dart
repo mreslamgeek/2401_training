@@ -25,7 +25,9 @@ class CustomDrawer extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    navKey.currentState?.pop();
+                  },
                   icon: const Icon(
                     Icons.close,
                     color: Colors.white,
