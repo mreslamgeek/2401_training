@@ -80,9 +80,8 @@ class CartCubit extends Cubit<CartState> {
 
     for (var productInCar in cartProducts) {
       int quntity = productInCar.pivot!.quantity!;
-      double price = double.parse(productInCar.price!);
 
-      count += quntity * price;
+      count += quntity * productInCar.price!;
     }
 
     return count;

@@ -56,7 +56,7 @@ class Product {
   String? name;
   String? image;
   String? description;
-  String? price;
+  double? price;
   int? categoryId;
   String? createdAt;
   String? updatedAt;
@@ -78,7 +78,9 @@ class Product {
     name = json['name']?.toString();
     image = json['image']?.toString();
     description = json['description']?.toString();
-    price = json['price']?.toString();
+    if (json['price'] != null) {
+      price = double.parse(json['price']);
+    }
     categoryId = int.tryParse(json['category_id']?.toString() ?? '');
     createdAt = json['created_at']?.toString();
     updatedAt = json['updated_at']?.toString();

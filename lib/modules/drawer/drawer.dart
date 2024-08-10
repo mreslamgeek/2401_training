@@ -117,7 +117,9 @@ class CustomDrawer extends StatelessWidget {
                 Icons.shopping_bag_outlined,
                 color: Colors.white,
               ),
-              onTap: () {},
+              onTap: () {
+                navKey.currentState?.pushNamed(AppRoutes.ORDER);
+              },
             ),
             ListTile(
               title: const Text('Wishlist',

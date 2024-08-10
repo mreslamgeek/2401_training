@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/global/cubits/cart_cubit/cart_cubit.dart';
 import 'package:flutter_application_1/modules/home/home_cubit.dart';
+import 'package:flutter_application_1/modules/order/cubit/order_cubit.dart';
 import 'package:flutter_application_1/routes/app_routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider<HomeCubit>(create: (context) => HomeCubit()),
           BlocProvider<CartCubit>(create: (context) => CartCubit()),
+          BlocProvider<OrderCubit>(create: (context) => OrderCubit()),
         ],
         child: MaterialApp(
           title: 'Flutter E-Commerce',
